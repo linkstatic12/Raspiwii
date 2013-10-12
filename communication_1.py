@@ -1,8 +1,20 @@
 import serial,time
 ser=serial.Serial()
 ser.port="/dev/ttyUSB0"
-MSP_IDT="\x24\x4d\x3c\x00\x64\x64"
-MSP_RAW_IMU="\x24\x4d\x3c\x00\x66\x66"
+BASIC="\x24\x4d\x3c\x00"
+MSP_IDT=BASIC+"\x64\x64"
+MSP_STATUS=BASIC+"\x63\x63"
+MSP_RAW_IMU=BASIC+"\x66\x66"
+MSP_SERVO=BASIC+"\x67\x67"
+MSP_MOTOR=BASIC+"\x68\x68"
+MSP_RC=BASIC+"\x69\x69"
+MSP_RAW_GPS=BASIC+"\x70\x70"
+MSP_COMP_GPS=BASIC+"\x71\x71"
+MSP_ATTITUDE=BASIC+"\x72\x72"
+MSP_ALTITUDE=BASIC+"\x73\x73"
+MSP_BAT=BASIC+"\x74\x74"
+
+CURRENT=MSP_STATUS
 ser.baudrate=115200
 ser.bytesize=serial.EIGHTBITS
 ser.parity=serial.PARITY_NONE
@@ -24,13 +36,13 @@ if ser.isOpen():
     try:
         ser.flushInput()
         ser.flushOutput()
-        ser.write(MSP_RAW_IMU)
-        print("Writing to "+ser.portstr+" "+MSP_RAW_IMU)
+        ser.write(CURRENT)
+        print("Writing to "+ser.portstr+" "+CURRENT)
         time.sleep(0.5)
         numOfLines=0
         while True:
             response=ser.readline()
-            print(type(response))
+            #print(type(response))
             
             print(response.encode("hex"))
             numOfLines=numOfLines+1
