@@ -1,0 +1,14 @@
+You need the following:
+1 x Rpi
+1 x MutliWii controller
+
+Attach the MW FC with the RPI through the USB cable given with the MW FC.
+Once you have done this go to LXterminal and type dmesg and see to what
+USBx the CP210x has connected itself. if you are connected to the 
+/dev/ttyUSB0 then just run the code and it will work. if not you will have
+to change it to any specific serial port or usb port you want. remember 
+this code will also work even if you have connected the MW FC with a serial
+port to the RPI.
+
+
+Author: asadullah Baig
